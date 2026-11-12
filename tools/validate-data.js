@@ -29,15 +29,23 @@ vm.runInContext(`
     const pair=product.maker+'|'+product.catalog;if(pairs.has(pair))errors.push('duplicate catalog: '+pair);pairs.add(pair);
     if(['primary','tag','isotype'].includes(product.category)&&!product.host)errors.push('missing antibody host: '+product.id);
     if(product.clonality==='Monoclonal'&&!product.clone)errors.push('missing monoclonal clone: '+product.id);
+    if(!product.url&&!product.verificationUrl)errors.push('missing official source: '+product.id);
+    if(['primary','tag','secondary'].includes(product.category)){
+      for(const field of ['reactivity','applications'])if(!product[field]?.length)errors.push('missing antibody '+field+': '+product.id);
+      if(!product.storage)errors.push('missing antibody storage: '+product.id);
+    }
     if(Object.keys(product).some(key=>/price|cost|quote/i.test(key)))errors.push('price field prohibited: '+product.id);
     const maker=LABPICK_MAKERS.find(m=>m.id===product.maker);
     if(maker&&!LabPickCore.safeUrl(LABPICK_LINKS.product(maker,product).url))errors.push('invalid resolved product link: '+product.id);
   }
+  if(LABPICK_PRODUCTS.length<200)errors.push('catalog must contain at least 200 verified products');
   if(errors.length){console.error(errors.join('\\n'));throw Error(errors.length+' data validation error(s)');}
   const counts=key=>Object.fromEntries([...new Set(LABPICK_PRODUCTS.map(p=>p[key]))].sort().map(k=>[k,LABPICK_PRODUCTS.filter(p=>p[key]===k).length]));
   console.log('PASS: '+LABPICK_PRODUCTS.length+' products / '+LABPICK_MAKERS.length+' sites');
   console.log('By category: '+JSON.stringify(counts('category')));
   console.log('By maker: '+JSON.stringify(counts('maker')));
+  const targets=new Map();for(const p of LABPICK_PRODUCTS.filter(p=>['primary','tag'].includes(p.category))){if(!targets.has(p.target))targets.set(p.target,new Set());targets.get(p.target).add(p.maker);}
+  console.log('Antibody targets with 3+ makers: '+[...targets.values()].filter(makers=>makers.size>=3).length+' / '+targets.size);
   console.log('Unverified search templates: '+LABPICK_MAKERS.filter(m=>!m.searchVerified).map(m=>m.id).join(', '));
   console.log('Unverified product templates: '+LABPICK_MAKERS.filter(m=>m.productUrl&&!m.productVerified).map(m=>m.id).join(', '));
 `,context);
