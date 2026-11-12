@@ -22,7 +22,7 @@ const base='file:///Users/sogabeyuuta/Desktop/reagent-finder/index.html',key='la
  await check('review 2: PDF links, related product kinds, maker dots and button labels',async()=>{
   const g=fixture(base),products=g.context.LABPICK_PRODUCTS;
   const badge=g.query('#results .maker-badge');assert(badge.getAttribute('style').startsWith('--maker-color:'));assert(!badge.getAttribute('style').includes('background'));
-  const sheets=products.filter(p=>p.datasheetUrl);assert.equal(sheets.length,17);
+  const sheets=products.filter(p=>p.datasheetUrl);assert.equal(sheets.length,18);
   for(const p of sheets){
    await g.hash(new URLSearchParams({product:p.id}).toString());
    const links=g.document.querySelectorAll('#modal-body a'),sheet=links.find(a=>a.textContent.includes('データシート (PDF)'));

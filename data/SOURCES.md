@@ -1,15 +1,68 @@
 # 製品同定・仕様の公式確認元
 
-確認日：**2026-11-12**。**308製品／25メーカー**。メーカー公式の商品ページ・データシート・取扱説明書を閲覧、または検索エンジンに掲載された公式ページ本文で、製品名・カタログ番号・抗体同定と掲載仕様を照合しました。全ページを実ブラウザで開いたという意味ではありません。`validate-data.js` は形式・重複・価格禁止・仕様欄等を検査するもので、資料の科学的な正しさを自動判定するものではありません。
+確認日：**2026-11-12**。**317製品／26メーカー**。メーカー公式の商品ページ・データシート・取扱説明書を閲覧、または検索エンジンに掲載された公式ページ本文で、製品名・カタログ番号・抗体同定と掲載仕様を照合しました。全ページを実ブラウザで開いたという意味ではありません。`validate-data.js` は形式・重複・価格禁止・仕様欄等を検査するもので、資料の科学的な正しさを自動判定するものではありません。
 
 ## 採用・記録基準
 
 - メーカー、番号、抗体の宿主・クローナリティ・クローンを公式資料で同定できた製品だけを採用。価格・引用数は記録していません。
-- 元の52製品のidを維持し、256製品を追加しました。既存製品も含め、確認できた交差性・用途・アイソタイプ・保存条件・容量を補完しています。
+- 元の52製品のidを維持し、265製品を追加しました。既存製品も含め、確認できた交差性・用途・アイソタイプ・保存条件・容量を補完しています。
 - 交差性はメーカーの確認済み／Species Reactivity欄を基本にし、配列相同性だけの予測種、引用例だけで追加された種は原則として加えていません。用途と交差性のリストは、全ての種×用途の組合せを保証しません。
 - アイソタイプコントロールの交差性、非抗体の宿主・アイソタイプ等、該当しない項目は省略。公式資料のSourceが宿主だけの抗体について、IgGを推定していません。
 - 容量は公式資料で確認できた包装のみ。複数の包装を1製品にまとめた基本番号もあります。CST等の包装サフィックス、Dojindoの国内外の包装コードは注文前に公式で確認してください。保存条件は原液／受領時を基本とし、開封・溶解後が異なる場合は明示しました。
 - URLテンプレートは引き続き `data/makers.js` のみ。以下は製品ごとの具体的な確認先です。リンクは将来の到達性、地域での入手可能性、販売継続を保証しません。
+
+## 収録数
+
+内蔵317製品／41サイト（製品収録26メーカー）。カテゴリ別・メーカー別は以下のとおりです。
+
+### カテゴリ別
+
+| カテゴリ | 件数 |
+|---|---:|
+| 消耗品 (`consumable`) | 1 |
+| 細胞培養 (`culture`) | 10 |
+| サイトカイン (`cytokine`) | 5 |
+| 色素・染色 (`dye`) | 3 |
+| 酵素・PCR (`enzyme`) | 4 |
+| 阻害剤・化合物 (`inhibitor`) | 10 |
+| アイソタイプ (`isotype`) | 4 |
+| キット・アッセイ (`kit`) | 18 |
+| 一次抗体 (`primary`) | 194 |
+| 一般試薬・WB (`reagent`) | 34 |
+| 二次抗体 (`secondary`) | 12 |
+| タグ抗体 (`tag`) | 18 |
+| 遺伝子導入 (`transfection`) | 4 |
+
+### メーカー別
+
+| メーカー | 件数 |
+|---|---:|
+| Abcam (`abcam`) | 69 |
+| Agilent (Dako) (`agilent`) | 1 |
+| ATTO (`atto`) | 2 |
+| Bio-Rad (`biorad`) | 2 |
+| Cell Signaling Technology (`cst`) | 69 |
+| Cytiva (`cytiva`) | 1 |
+| Dojindo (`dojindo`) | 3 |
+| Jackson ImmunoResearch (`jackson`) | 2 |
+| MBL (`mbl`) | 1 |
+| Nacalai Tesque (`nacalai`) | 12 |
+| New England Biolabs (`neb`) | 1 |
+| Nichirei Biosciences (`nichirei`) | 1 |
+| NIPPON GENE (`nippongene`) | 1 |
+| Novus Biologicals（R&D Systems に統合） (`novus`) | 2 |
+| Promega (`promega`) | 3 |
+| Proteintech (`proteintech`) | 63 |
+| QIAGEN (`qiagen`) | 2 |
+| R&D Systems (`rnd`) | 7 |
+| Roche (Sigma 経由) (`roche`) | 2 |
+| Santa Cruz Biotechnology (`scbt`) | 3 |
+| Sigma-Aldrich (Merck) (`sigma`) | 19 |
+| Takara Bio (`takara`) | 3 |
+| Thermo Fisher Scientific (Invitrogen) (`thermo`) | 33 |
+| TOYOBO (`toyobo`) | 4 |
+| Vector Laboratories (`vector`) | 4 |
+| FUJIFILM Wako (`wako`) | 7 |
 
 ## 同定・比較上の注意
 
@@ -22,7 +75,11 @@
 - Sigma／MilliporeのWBKLS0500には、ブランドmmの確認済み個別URLを指定。Cytiva RPN2232は1,000 cm²用、説明書指定の受領時保存は18–30°C・遮光です。
 - Thermo 10270106は公式ページにValue FBSへの切替案内があります。Sigma P2938は地域によって販売終了表示があり、メーカー記載の対応製品はMillipore IPVH00010です。
 
-## 製品別の確認先（全308件）
+- KIF1Bはtotalを5社8製品、Ser1487リン酸化体をCSTの1製品で収録。リン酸化体は別ターゲットです。`KIF1Bα`／`KIF1Bβ`は検索用の別名であり、各製品が両アイソフォームを認識する保証ではありません。抗原部位と参照配列が異なるため、公式の免疫原範囲を各製品のnoteに記録しました。
+- Abcam ab234869は提示された日本語URLを取得できなかったため、同じ番号の現行英語公式商品ページで照合しました。IHC-P／Humanのみを収録しています。CST #11993のMouse・Rat・Monkeyは予測交差性なので加えていません。NB100-57494の用途は公式用途欄のIPのみです。
+- 現行品の確認は、公式商品ページと購入欄または現行ターゲット別カタログへの掲載に基づきます。ThermoのBethyl A301-055Aは既存の`thermo`、Novusの2製品は既存の`novus`に帰属させ、メーカー定義は変更していません。
+
+## 製品別の確認先（全317件）
 
 | 製品id | メーカー／カタログ番号 | ターゲット | 公式確認元 |
 |---|---|---|---|
@@ -335,9 +392,19 @@
 | `proteintech-cl488-65109` | Proteintech / `CL488-65109` | CD45 | [公式資料1](https://www.ptglab.com/products/CD45-Antibody-CL488-65109.htm) |
 | `rnd-m6000b-1` | R&D Systems / `M6000B-1` | Mouse IL-6 ELISA | [公式資料1](https://resources.rndsystems.com/pdfs/datasheets/m6000b.pdf) |
 
+| `abcam-ab234869` | Abcam / `ab234869` | KIF1B | [商品ページ](https://www.abcam.com/en-us/products/primary-antibodies/kif1b-antibody-ab234869) |
+| `proteintech-15263-1-ap` | Proteintech / `15263-1-AP` | KIF1B | [商品ページ](https://www.ptglab.com/products/KIF1B-Antibody-15263-1-AP.htm) |
+| `scbt-sc-376246` | Santa Cruz Biotechnology / `sc-376246` | KIF1B | [商品ページ](https://www.scbt.com/p/kif1b-antibody-e-12) / [データシート (PDF)](https://datasheets.scbt.com/sc-376246.pdf) |
+| `thermo-pa5-93117` | Thermo Fisher Scientific (Invitrogen) / `PA5-93117` | KIF1B | [商品ページ](https://www.thermofisher.com/antibody/product/KIF1B-Antibody-Polyclonal/PA5-93117) / [追加公式資料](https://www.thermofisher.com/antibody/primary/target/kif1b) |
+| `thermo-pa5-76971` | Thermo Fisher Scientific (Invitrogen) / `PA5-76971` | KIF1B | [商品ページ](https://www.thermofisher.com/antibody/product/KIF1B-Antibody-Polyclonal/PA5-76971) / [追加公式資料](https://www.thermofisher.com/antibody/primary/target/kif1b) |
+| `thermo-a301-055a` | Thermo Fisher Scientific (Invitrogen) / `A301-055A` | KIF1B | [商品ページ](https://www.thermofisher.com/antibody/product/KIF1B-Antibody-Polyclonal/A301-055A) / [追加公式資料](https://www.thermofisher.com/antibody/primary/target/kif1b) |
+| `novus-nb100-57493` | Novus Biologicals（R&D Systems に統合） / `NB100-57493` | KIF1B | [商品ページ](https://www.rndsystems.com/products/kif1b-antibody_nb100-57493) / [追加公式資料](https://www.rndsystems.com/target/kif1b/antibodies) |
+| `novus-nb100-57494` | Novus Biologicals（R&D Systems に統合） / `NB100-57494` | KIF1B | [商品ページ](https://www.rndsystems.com/products/kif1b-antibody_nb100-57494) / [追加公式資料](https://www.rndsystems.com/target/kif1b/antibodies) |
+| `cst-11993` | Cell Signaling Technology / `11993` | KIF1B (phospho Ser1487) | [商品ページ](https://www.cellsignal.com/products/primary-antibodies/phospho-kif1b-ser1487-antibody/11993) |
+
 ## 3社以上で比較できる抗体ターゲット
 
-**66ターゲット／一次・タグ抗体の全66ターゲット**。メーカーidの重複を除いて集計。リン酸化体は非リン酸化特異性の製品と別ターゲット、Mycタグは内在性c-Mycと別ターゲットとして数えています。同一メーカーの蛍光標識違いをメーカー数の水増しに使っていません。
+**67ターゲット／一次・タグ抗体の全68ターゲット**。メーカーidの重複を除いて集計。リン酸化体は非リン酸化特異性の製品と別ターゲット、Mycタグは内在性c-Mycと別ターゲットとして数えています。同一メーカーの蛍光標識違いをメーカー数の水増しに使っていません。
 
 | ターゲット | メーカー数 | 収録メーカー |
 |---|---:|---|
@@ -375,6 +442,7 @@
 | HSP90 | 3 | `abcam`, `cst`, `proteintech` |
 | JNK | 3 | `abcam`, `cst`, `proteintech` |
 | Ki-67 | 3 | `abcam`, `cst`, `proteintech` |
+| KIF1B | 5 | `abcam`, `novus`, `proteintech`, `scbt`, `thermo` |
 | Lamin B1 | 3 | `abcam`, `cst`, `proteintech` |
 | LC3B | 3 | `abcam`, `cst`, `proteintech` |
 | mTOR | 3 | `abcam`, `cst`, `proteintech` |
@@ -408,6 +476,8 @@
 | β-Tubulin | 3 | `abcam`, `cst`, `proteintech` |
 | γH2AX (Ser139) | 3 | `abcam`, `cst`, `sigma` |
 
+KIF1B (phospho Ser1487) はCSTの1社のみで、上表の3社以上の集計には含めません。
+
 ## 未収録の仕様と理由
 
 製品同定に不安が残る採用idは**なし**。以下は製品そのものの同定とは別の、仕様確認の残りです。空欄は未収録であり、非対応・交差性なしを意味しません。
@@ -415,13 +485,17 @@
 | 項目 | 対象id／範囲 | 理由 |
 |---|---|---|
 | 保存条件 | `dojindo-m009`, `sigma-p2938`, `nichirei-424151`, `sigma-wbkls0500` | 取得できた公式本文に温度の明記がない、または関連キット／別製品の保存条件と区別して確定できなかったため。輸送温度や保管分類からは推定しない。 |
-| 容量（CST） | `cst-3700`, `cst-4370`, `cst-9102`, `cst-4060`, `cst-4691`, `cst-9664`, `cst-3868`, `cst-7074`, `cst-7076`, `cst-3900`, `cst-3873`, `cst-2128`, `cst-4499`, `cst-2524`, `cst-2947`, `cst-2978`, `cst-9129`, `cst-2586`, `cst-9139`, `cst-9145`, `cst-8242`, `cst-2983`, `cst-5536`, `cst-2217`, `cst-2211`, `cst-9212`, `cst-2532`, `cst-4267`, `cst-2165`, `cst-8480`, `cst-14074`, `cst-3195`, `cst-13116`, `cst-5741`, `cst-3879`, `cst-19245`, `cst-5605`, `cst-9542`, `cst-9662`, `cst-2870`, `cst-5023`, `cst-5114`, `cst-9718`, `cst-99940`, `cst-25229`, `cst-98941`, `cst-77699`, `cst-76437`, `cst-70076`, `cst-86163`, `cst-13684`, `cst-12653`, `cst-13917`, `cst-3724`, `cst-12698`, `cst-13202`, `cst-12586`, `cst-13901`, `cst-36169`, `cst-2956`, `cst-2276`, `cst-4877`, `cst-9252`, `cst-3777`, `cst-5678`, `cst-4511` | 公式資料が基本番号だけを記載している、または包装選択欄を取得本文から確定できなかったため。確認できた他製品の容量を流用しない。 |
-| 容量（Abcam） | `abcam-ab2732`, `abcam-ab40820`, `abcam-ab216347`, `abcam-ab955`, `abcam-ab9116`, `abcam-ab236224`, `abcam-ab97051`, `abcam-ab6789`, `abcam-ab18443`, `abcam-ab18415`, `abcam-ab214362`, `abcam-ab13492`, `abcam-ab217553`, `abcam-ab4822` | 公式資料が基本番号だけを記載している、または包装選択欄を取得本文から確定できなかったため。確認できた他製品の容量を流用しない。 |
-| 容量（Proteintech） | `proteintech-66305-2-ig`, `proteintech-17617-1-ap`, `proteintech-21851-1-ap`, `proteintech-65109-1-pbs`, `proteintech-cl647-65109`, `proteintech-cl488-65109` | 公式資料が基本番号だけを記載している、または包装選択欄を取得本文から確定できなかったため。確認できた他製品の容量を流用しない。 |
+| 容量（CST） | `cst-11993`, `cst-3700`, `cst-4370`, `cst-9102`, `cst-4060`, `cst-4691`, `cst-9664`, `cst-3868`, `cst-7074`, `cst-7076`, `cst-3900`, `cst-3873`, `cst-2128`, `cst-4499`, `cst-2524`, `cst-2947`, `cst-2978`, `cst-9129`, `cst-2586`, `cst-9139`, `cst-9145`, `cst-8242`, `cst-2983`, `cst-5536`, `cst-2217`, `cst-2211`, `cst-9212`, `cst-2532`, `cst-4267`, `cst-2165`, `cst-8480`, `cst-14074`, `cst-3195`, `cst-13116`, `cst-5741`, `cst-3879`, `cst-19245`, `cst-5605`, `cst-9542`, `cst-9662`, `cst-2870`, `cst-5023`, `cst-5114`, `cst-9718`, `cst-99940`, `cst-25229`, `cst-98941`, `cst-77699`, `cst-76437`, `cst-70076`, `cst-86163`, `cst-13684`, `cst-12653`, `cst-13917`, `cst-3724`, `cst-12698`, `cst-13202`, `cst-12586`, `cst-13901`, `cst-36169`, `cst-2956`, `cst-2276`, `cst-4877`, `cst-9252`, `cst-3777`, `cst-5678`, `cst-4511` | 公式資料が基本番号だけを記載している、または包装選択欄を取得本文から確定できなかったため。確認できた他製品の容量を流用しない。 |
+| 容量（Abcam） | `abcam-ab234869`, `abcam-ab2732`, `abcam-ab40820`, `abcam-ab216347`, `abcam-ab955`, `abcam-ab9116`, `abcam-ab236224`, `abcam-ab97051`, `abcam-ab6789`, `abcam-ab18443`, `abcam-ab18415`, `abcam-ab214362`, `abcam-ab13492`, `abcam-ab217553`, `abcam-ab4822` | 公式資料が基本番号だけを記載している、または包装選択欄を取得本文から確定できなかったため。確認できた他製品の容量を流用しない。 |
+| 容量（Proteintech） | `proteintech-15263-1-ap`, `proteintech-66305-2-ig`, `proteintech-17617-1-ap`, `proteintech-21851-1-ap`, `proteintech-65109-1-pbs`, `proteintech-cl647-65109`, `proteintech-cl488-65109` | 公式資料が基本番号だけを記載している、または包装選択欄を取得本文から確定できなかったため。確認できた他製品の容量を流用しない。 |
 | 容量（R&D Systems） | `rnd-240-b`, `rnd-236-eg`, `rnd-206-il`, `rnd-210-ta`, `rnd-285-if` | 公式資料が基本番号だけを記載している、または包装選択欄を取得本文から確定できなかったため。確認できた他製品の容量を流用しない。 |
-| アイソタイプ | `cst-9102`, `cst-7074`, `cst-7076`, `cst-2211`, `cst-9212`, `cst-2532`, `cst-9542`, `cst-9662`, `cst-2870`, `cst-5114`, `sigma-h6908`, `cst-9252`, `cst-5678` | 確認したSource／Isotype欄等に宿主のみが記され、アイソタイプを確定できなかったため。 |
+| 容量（KIF1Bのその他製品） | `thermo-a301-055a`, `novus-nb100-57493`, `novus-nb100-57494` | 取得した公式資料の包装選択欄から容量を確定できなかったため。濃度から容量を推定しない。 |
+| アイソタイプ | `cst-11993`, `cst-9102`, `cst-7074`, `cst-7076`, `cst-2211`, `cst-9212`, `cst-2532`, `cst-9542`, `cst-9662`, `cst-2870`, `cst-5114`, `sigma-h6908`, `cst-9252`, `cst-5678` | 確認したSource／Isotype欄等に宿主のみが記され、アイソタイプを確定できなかったため。 |
 
 ## 未採用の候補
+
+- **Sigma-Aldrich HPA026434**：米国・日本の公式商品URLを取得できず、公式検索でもKIF1B製品として現行販売・仕様を確認できなかったため未採用。販売終了とは断定していません。
+- **Thermo Fisher PA5-105724**：公式の商品ページ・注文ページを取得できず、現行KIF1Bカタログでも同番号を確認できなかったため未採用。別番号・別製品の仕様は流用していません。
 
 - **Matrigel、PEI MAX**：今回確認できたメーカー定義の範囲で、メーカー・正式な番号を公式資料と結び付けて採用するまでの確認を完了できませんでした。別メーカーに誤って帰属させていません。Aのメーカー定義を維持する指示に従い、新規メーカー追加は行っていません。
 - 同定が割れた番号、旧番号から仕様を推定する必要がある候補、公式資料にたどれなかった候補は追加していません。未採用候補に仮idを割り当てていません。
