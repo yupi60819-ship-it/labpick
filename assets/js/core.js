@@ -69,7 +69,7 @@
     }).join(',')).join('\r\n');
   }
   function plain(value) { return value!==null && typeof value==='object' && !Array.isArray(value) && Object.getPrototypeOf(value)===Object.prototype; }
-  const textFields=['id','maker','name','catalog','category','target','gene','host','clonality','clone','isotype','conjugate','size','storage','note','url','verificationUrl','secondaryFor'];
+  const textFields=['id','maker','name','catalog','category','target','gene','host','clonality','clone','isotype','conjugate','size','storage','note','url','verificationUrl','datasheetUrl','secondaryFor'];
   const listFields=['aliases','reactivity','applications'];
   function validateProduct(value, makers, custom=false) {
     if (!plain(value)) throw Error('製品はオブジェクトで指定してください。');
@@ -91,7 +91,7 @@
       if (!Array.isArray(value[key]) || value[key].length>100 || value[key].some(s=>typeof s!=='string'||s.length>500)) throw Error(key+' は文字列の配列にしてください。');
       out[key]=[...new Set(value[key].map(s=>s.trim()).filter(Boolean))];
     }
-    for (const key of ['url','verificationUrl']) if (out[key] && !safeUrl(out[key])) throw Error('URL は認証情報を含まない http / https のみ利用できます。');
+    for (const key of ['url','verificationUrl','datasheetUrl']) if (out[key] && !safeUrl(out[key])) throw Error('URL は認証情報を含まない http / https のみ利用できます。');
     if (out.clonality && !['Monoclonal','Polyclonal','Oligoclonal'].includes(out.clonality)) throw Error('クローナリティが不正です。');
     return out;
   }

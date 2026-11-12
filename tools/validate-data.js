@@ -29,7 +29,9 @@ vm.runInContext(`
     const pair=product.maker+'|'+product.catalog;if(pairs.has(pair))errors.push('duplicate catalog: '+pair);pairs.add(pair);
     if(['primary','tag','isotype'].includes(product.category)&&!product.host)errors.push('missing antibody host: '+product.id);
     if(product.clonality==='Monoclonal'&&!product.clone)errors.push('missing monoclonal clone: '+product.id);
-    if(!product.url&&!product.verificationUrl)errors.push('missing official source: '+product.id);
+    if(!product.url&&!product.verificationUrl&&!product.datasheetUrl)errors.push('missing official source: '+product.id);
+    if(product.url&&/\\.pdf(?:[?#]|$)/i.test(product.url))errors.push('PDF must use datasheetUrl: '+product.id);
+    if(product.datasheetUrl&&(!LabPickCore.safeUrl(product.datasheetUrl)||!/\\.pdf(?:[?#]|$)/i.test(product.datasheetUrl)))errors.push('invalid PDF datasheet URL: '+product.id);
     if(['primary','tag','secondary'].includes(product.category)){
       for(const field of ['reactivity','applications'])if(!product[field]?.length)errors.push('missing antibody '+field+': '+product.id);
       if(!product.storage)errors.push('missing antibody storage: '+product.id);

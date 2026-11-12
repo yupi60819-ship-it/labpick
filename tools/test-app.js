@@ -19,5 +19,24 @@ const base='file:///Users/sogabeyuuta/Desktop/reagent-finder/index.html',key='la
  await check('backup JSON export, schema rejection, preview and replacement',async()=>{await f.click('[data-act="data"]');await f.click('[data-act="backup-export"]');const backup=JSON.parse(await f.state.downloads.at(-1).blob.text());const invalid={...backup,myProducts:[{...backup.myProducts[0],url:'javascript:alert(1)'}]};q('#import-file').files=[{size:100,text:async()=>JSON.stringify(invalid)}];await f.dispatch('change',q('#import-file'));assert(!q('#import-error').hidden);assert(q('#import-apply').disabled);assert.equal(personal().myProducts.length,1);const valid={version:1,myProducts:[],favorites:[],purchases:[]};q('#import-file').files=[{size:100,text:async()=>JSON.stringify(valid)}];await f.dispatch('change',q('#import-file'));assert(!q('#import-preview').hidden);await f.click('#import-apply');assert.equal(personal().myProducts.length,0);assert.equal(personal().purchases.length,0);});
  await check('storage unavailable and GitHub Pages subpath startup',async()=>{const denied=fixture('https://example.github.io/reagent-finder/index.html#q=ab-8245',{},true);assert.equal(Number(denied.query('#result-count strong').textContent),1);assert(!denied.query('#storage-warning').hidden);await denied.click('#results [data-act="favorite"]');assert.equal(denied.query('#favorite-total').textContent,'1');assert(denied.location.href.startsWith('https://example.github.io/reagent-finder/'));});
  await check('clipboard denial exposes selectable fallback and keyboard focus stays in modal',async()=>{await f.click('.main-nav [data-view="catalog"]');f.context.navigator.clipboard.writeText=async()=>{throw Error('denied');};await f.click('[data-act="share"]');await Promise.resolve();assert(q('.copy-fallback').value.includes('file:///'));await f.dispatch('keydown',q('.copy-fallback'),{key:'Tab'});assert(f.document.activeElement.closest('#modal'));await f.dispatch('keydown',q('.copy-fallback'),{key:'Escape'});assert(!q('#modal').open);});
+ await check('review 2: PDF links, related product kinds, maker dots and button labels',async()=>{
+  const g=fixture(base),products=g.context.LABPICK_PRODUCTS;
+  const badge=g.query('#results .maker-badge');assert(badge.getAttribute('style').startsWith('--maker-color:'));assert(!badge.getAttribute('style').includes('background'));
+  const sheets=products.filter(p=>p.datasheetUrl);assert.equal(sheets.length,17);
+  for(const p of sheets){
+   await g.hash(new URLSearchParams({product:p.id}).toString());
+   const links=g.document.querySelectorAll('#modal-body a'),sheet=links.find(a=>a.textContent.includes('データシート (PDF)'));
+   assert(sheet,p.id);assert.equal(sheet.href,p.datasheetUrl);assert.equal(sheet.getAttribute('rel'),'noopener noreferrer');
+   const maker=links.find(a=>a.textContent.includes(p.url?'メーカー商品ページを開く':'メーカーサイトで検索'));
+   assert(maker,p.id);assert(!/\.pdf(?:[?#]|$)/i.test(maker.href));if(p.url)assert.equal(maker.href,p.url);
+  }
+  await g.hash(new URLSearchParams({product:'cst-2983'}).toString());
+  assert(!g.document.querySelectorAll('.related-button').some(b=>b.dataset.id==='sigma-r0395'));
+  await g.click('[data-act="compare-related"]');
+  const ids=new URLSearchParams(g.location.hash.slice(1)).get('compare').split(',');assert(ids.length>=3);assert(ids.every(id=>['primary','tag'].includes(products.find(p=>p.id===id).category)));
+  await g.hash(new URLSearchParams({product:'sigma-r0395'}).toString());
+  assert(g.document.querySelectorAll('.related-button').every(b=>products.find(p=>p.id===b.dataset.id).category==='inhibitor'));
+  assert(g.document.querySelectorAll('button').every(b=>!/[↗→↓]/.test(b.textContent)));
+ });
  console.log(checks+' DOM event-flow test groups passed. Real browser layout remains unverified.');
 })().catch(error=>{console.error(error);process.exitCode=1;});

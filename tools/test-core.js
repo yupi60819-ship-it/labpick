@@ -23,9 +23,9 @@ check('BOM CSV, quotes, multiline and spreadsheet formulas',()=>{
  const output=C.csv([['=1+1',' +1','-2','@SUM(A1)','a,b','a"b','a\\nb']]);assert(output.startsWith('\\uFEFF'));assert(output.includes('"\\\'=1+1"'));assert(output.includes('"a""b"'));assert(output.includes('"a\\nb"'));
 });
 check('backup roundtrip and atomic schema rejection',()=>{
- const custom={id:'my-test',maker:'cst',name:'<img src=x onerror=alert(1)>',catalog:'TEST',category:'reagent',target:'Test',url:'https://example.com'};
+ const custom={id:'my-test',maker:'cst',name:'<img src=x onerror=alert(1)>',catalog:'TEST',category:'reagent',target:'Test',url:'https://example.com',datasheetUrl:'https://example.com/manual.pdf'};
  const backup={version:1,myProducts:[custom],favorites:['my-test'],purchases:[{id:'my-test',quantity:2,quote:1234,memo:'=1+1'}]};assert.deepEqual(C.validateBackup(JSON.parse(JSON.stringify(backup)),makers,p),backup);
- for(const mutate of [v=>v.myProducts[0].url='javascript:alert(1)',v=>v.myProducts.push({...custom}),v=>v.favorites.push('missing'),v=>v.purchases[0].quantity=0,v=>v.purchases[0].quote=-1,v=>v.myProducts[0].price=100,v=>v.myProducts[0].maker='missing',v=>v.myProducts[0].name=123]){const copy=JSON.parse(JSON.stringify(backup));mutate(copy);assert.throws(()=>C.validateBackup(copy,makers,p));}
+ for(const mutate of [v=>v.myProducts[0].url='javascript:alert(1)',v=>v.myProducts[0].datasheetUrl='javascript:alert(1)',v=>v.myProducts[0].datasheetUrl='https://user:pass@example.com/manual.pdf',v=>v.myProducts[0].datasheetUrl=123,v=>v.myProducts.push({...custom}),v=>v.favorites.push('missing'),v=>v.purchases[0].quantity=0,v=>v.purchases[0].quote=-1,v=>v.myProducts[0].price=100,v=>v.myProducts[0].maker='missing',v=>v.myProducts[0].name=123]){const copy=JSON.parse(JSON.stringify(backup));mutate(copy);assert.throws(()=>C.validateBackup(copy,makers,p));}
  assert.throws(()=>C.validateBackup(JSON.parse('{"version":1,"myProducts":[{"__proto__":{}}],"favorites":[],"purchases":[]}'),makers,p));
 });
 check('secondary candidates respect host, IgM and conjugation',()=>{
